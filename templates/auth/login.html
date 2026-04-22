@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card auth-shell">
+    <div class="auth-hero">
+        <span class="chip">Welcome Back</span>
+        <h2>Secure Login</h2>
+        <p>Access your role-based workspace for patient analytics, alerts, and reporting.</p>
+        <div class="hero-actions">
+            <a class="btn btn-soft" href="/landing/">Explore Platform</a>
+            <a class="btn btn-primary" href="/signup/">Sign Up</a>
+        </div>
+    </div>
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        <label for="id_email">Email</label>
+        {{ form.email }}
+        <label for="id_password">Password</label>
+        {{ form.password }}
+        <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+</section>
+{% endblock %}

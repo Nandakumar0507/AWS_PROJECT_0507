@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card glass">
+    <h2>Pressure Monitoring Dashboard</h2>
+    <p class="muted">Monitor live pressure patterns, trend analytics, and risk alerts in one flow.</p>
+    <div class="filter-row">
+        <label for="patient-filter">Patient:</label>
+        <select id="patient-filter"></select>
+        <label for="hours-filter">Time window:</label>
+        <select id="hours-filter">
+            <option value="1">Last hour</option>
+            <option value="6">Last 6 hours</option>
+            <option value="24">Last 24 hours</option>
+        </select>
+        <button id="refresh-btn" type="button" class="btn btn-soft">Refresh</button>
+    </div>
+    <div class="stats-grid" id="kpi-grid">
+        <div class="stat-box"><span>Latest PPI</span><strong id="kpi-latest-ppi">0</strong></div>
+        <div class="stat-box"><span>Latest Contact %</span><strong id="kpi-latest-contact">0</strong></div>
+        <div class="stat-box"><span>Avg PPI</span><strong id="kpi-avg-ppi">0</strong></div>
+        <div class="stat-box"><span>Posture Stability</span><strong id="kpi-stability">0</strong></div>
+    </div>
+    <p id="window-note" class="muted small-note"></p>
+    <div id="alert-list" class="alerts"></div>
+</section>
+<section class="grid">
+    <div class="card glass">
+        <h3>Heatmap (Latest 32x32)</h3>
+        <div id="heatmap" class="heatmap"></div>
+    </div>
+    <div class="card glass chart-card">
+        <h3>PPI Over Time</h3>
+        <div class="chart-wrap">
+            <canvas id="ppiChart"></canvas>
+        </div>
+    </div>
+    <div class="card glass chart-card">
+        <h3>Contact Area % Over Time</h3>
+        <div class="chart-wrap">
+            <canvas id="contactChart"></canvas>
+        </div>
+    </div>
+    <div class="card glass chart-card">
+        <h3>Risk Score Over Time</h3>
+        <div class="chart-wrap">
+            <canvas id="riskChart"></canvas>
+        </div>
+    </div>
+</section>
+<section class="grid">
+    <div class="card glass">
+        <h3>Clinical Overview</h3>
+        <div class="stats-grid">
+            <div class="stat-box"><span>Monitored Patients</span><strong id="kpi-patients">0</strong></div>
+            <div class="stat-box"><span>Alerts (24h)</span><strong id="kpi-alerts24">0</strong></div>
+            <div class="stat-box"><span>Comments (24h)</span><strong id="kpi-comments24">0</strong></div>
+            <div class="stat-box"><span>High Alerts</span><strong id="kpi-high-alerts">0</strong></div>
+        </div>
+    </div>
+    <div class="card glass">
+        <h3>AI Guidance</h3>
+        <ul id="insight-list" class="feature-list"></ul>
+    </div>
+</section>
+<section class="card glass">
+    <h3>Comments</h3>
+    <textarea id="new-comment" rows="3" placeholder="Add context for clinicians..."></textarea>
+    <button id="submit-comment" type="button" class="btn btn-primary">Add Comment</button>
+    <div id="comments-container"></div>
+</section>
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card narrow glass">
+    <h2>My Profile</h2>
+    <p class="muted">Keep your details up to date for clear clinician communication.</p>
+    <form method="post" class="stack-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</section>
+{% endblock %}

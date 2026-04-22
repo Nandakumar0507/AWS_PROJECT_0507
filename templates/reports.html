@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card glass">
+    <h2>Daily Summary Report</h2>
+    <div class="stats-grid">
+        <div class="stat-box">
+            <span>Today Avg PPI</span>
+            <strong>{{ today_avg_ppi|floatformat:2 }}</strong>
+        </div>
+        <div class="stat-box">
+            <span>Yesterday Avg PPI</span>
+            <strong>{{ yesterday_avg_ppi|floatformat:2 }}</strong>
+        </div>
+        <div class="stat-box">
+            <span>Today Contact Area %</span>
+            <strong>{{ today_avg_contact|floatformat:2 }}</strong>
+        </div>
+        <div class="stat-box">
+            <span>Yesterday Contact Area %</span>
+            <strong>{{ yesterday_avg_contact|floatformat:2 }}</strong>
+        </div>
+    </div>
+</section>
+<section class="card glass">
+    <h3>Today Alerts</h3>
+    {% for a in today_alerts %}
+        <p class="alert-row severity-{{ a.severity|lower }}">{{ a.timestamp }} - {{ a.severity }} - {{ a.message }}</p>
+    {% empty %}
+        <p class="muted">No alerts today.</p>
+    {% endfor %}
+</section>
+{% endblock %}

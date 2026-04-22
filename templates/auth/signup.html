@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card auth-shell">
+    <div class="auth-hero">
+        <span class="chip">New Patient Account</span>
+        <h2>Create Your Account</h2>
+        <p>Get real-time pressure tracking, insights, and clinician collaboration in one secure workspace.</p>
+        <a class="btn btn-soft" href="/">Already have an account?</a>
+    </div>
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+</section>
+{% endblock %}

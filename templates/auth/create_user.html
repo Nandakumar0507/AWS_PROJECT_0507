@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="grid">
+    <div class="card glass">
+        <h2>Create Patient/Clinician</h2>
+        <p class="muted">Provision role-based accounts with secure defaults.</p>
+        <form method="post" class="stack-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Create User</button>
+        </form>
+    </div>
+    <div class="card glass">
+        <h2>Assign Patients</h2>
+        {% for p in patients %}
+            <form method="post" action="/patients/{{ p.id }}/assign/" class="assign-row">
+                {% csrf_token %}
+                <span class="pill">{{ p.user.email }}</span>
+                <select name="clinician_id">
+                    {% for c in clinicians %}
+                        <option value="{{ c.id }}" {% if p.assigned_clinician_id == c.id %}selected{% endif %}>
+                            {{ c.email }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-soft">Assign</button>
+            </form>
+        {% empty %}
+            <p>No patients found.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
